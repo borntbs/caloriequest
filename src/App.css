@@ -8,6 +8,15 @@
   outline: dashed 1px red;
 } */
 
+@font-face {
+  font-family: "Ebihara";
+  src: local("EbiharaNoKuseji"), url("./EbiharaNoKuseji.ttf");
+}
+
+body {
+  font-family: Ebihara;
+}
+
 .dropdown {
   opacity: 0;
   transition: opacity 0.3s;
