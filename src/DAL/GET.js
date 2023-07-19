@@ -1,4 +1,4 @@
-const nutriAPIGateway =
+export const nutriAPIGateway =
   "https://j8sa414f2f.execute-api.ap-southeast-2.amazonaws.com/Retrieve_Nutrition_Data";
 
 export const getNutriInfo = async (e) => {
