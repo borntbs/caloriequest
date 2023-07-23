@@ -10,6 +10,7 @@ const Main = (props) => {
   const [infoBoxStatus, setInfoBoxStatus] = useState({ open: false, data: {} });
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState(false);
+  const [login, setLogin] = useState({ status: false, Username: "" });
 
   const getNutriInfo = async (e) => {
     setLoading(true);
@@ -42,7 +43,6 @@ const Main = (props) => {
     pw = document.querySelector("#login-password").value;
     const params = {
       TableName: "CQUsers",
-      header: { login: "false" },
       Item: {
         Username: username,
         Password: pw,
@@ -51,12 +51,16 @@ const Main = (props) => {
     const response = await fetch(
       "https://j8sa414f2f.execute-api.ap-southeast-2.amazonaws.com/CQUsers",
       {
+        headers: {
+          login: false,
+        },
         method: "POST",
         body: JSON.stringify(params),
       }
     );
-    const resJSON = await response.json();
+
     console.log(response);
+    const resJSON = await response.json();
     console.log(resJSON);
   };
 
@@ -73,7 +77,7 @@ const Main = (props) => {
       "https://j8sa414f2f.execute-api.ap-southeast-2.amazonaws.com/CQUsers",
       {
         headers: {
-          login: "true",
+          login: true,
         },
         method: "POST",
         body: JSON.stringify(params),
@@ -81,7 +85,10 @@ const Main = (props) => {
     );
     console.log(response);
     const resJSON = await response.json();
-    console.log(resJSON);
+    if (resJSON.details === "Login Success") {
+      setLogin({ status: true, Username: username });
+      setModal(false);
+    }
   };
 
   const handleModal = (e) => {
@@ -109,8 +116,8 @@ const Main = (props) => {
   return (
     <div className="h-[100vh] flex items-center flex-col justify-around md:flex-row lg:justify-center lg:gap-[20em] bg-amber-100">
       {modal && <LoginModal props={modalProps} />}
+      {!login.status && <LoginBtn props={loginBtnProps} />}
       <div className="max-w-fit">
-        <LoginBtn props={loginBtnProps} />
         <img
           src="https://soco-st.com/wp-content/themes/socost/upload/7281_color.svg"
           alt="Man on diet restrictions"
