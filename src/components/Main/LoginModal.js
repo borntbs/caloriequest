@@ -4,7 +4,7 @@ const LoginModal = ({ props }) => {
   const inputCSS = "shadow-inner pl-1";
   return (
     <div className="absolute z-10 bg-black h-full w-full flex items-center justify-center bg-opacity-30">
-      <div className="bg-white h-[30%] w-[30%] min-h-fit min-w-fit relative z-10 bg-opacity-80 rounded-xl border-solid border-gray-400">
+      <div className="bg-white h-[30%] w-[30%] min-h-fit min-w-fit relative z-10 bg-opacity-80 rounded-xl border-solid border-gray-400 flex flex-col">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -21,8 +21,18 @@ const LoginModal = ({ props }) => {
           />
         </svg>
 
+        {/* <div className="flex flex-row text-2xl justify-center ">
+        
+          <div className="hover:cursor-pointer bg-slate-300 text-center flex-grow rounded-tl-xl flex justify-center ">
+            <span className="bg-green-400 p-3">Login</span>
+          </div>
+          <div className="hover:cursor-pointer bg-slate-300 flex-grow text-center rounded-tr-xl flex justify-center">
+            <span className="bg-amber-300 p-3">Create Account</span>
+          </div>
+        </div> */}
+
         <div className="flex flex-col h-full justify-center gap-3 p-4 relative">
-          <label htmlFor="username" className="font-bold">
+          <label htmlFor="username" className="font-bold hidden">
             Username
           </label>
           <input
@@ -30,8 +40,19 @@ const LoginModal = ({ props }) => {
             type="text"
             placeholder="Username"
             autoComplete="off"
-            className={inputCSS}
+            className={inputCSS + " hidden"}
             id="login-username"
+          ></input>
+          <label htmlFor="email" className="font-bold">
+            Email
+          </label>
+          <input
+            name="email"
+            type="email"
+            placeholder="Email"
+            autoComplete="off"
+            className={inputCSS}
+            id="login-email"
           ></input>
           <label htmlFor="password" className="font-bold">
             Password
