@@ -40,13 +40,23 @@ const Main = (props) => {
   const registerUser = async () => {
     let username;
     let pw;
+    let email;
+    email = document.querySelector("#login-email").value;
     username = document.querySelector("#login-username").value;
     pw = document.querySelector("#login-password").value;
+    // const params = {
+    //   TableName: "CQUsers",
+    //   Item: {
+    //     Username: username,
+    //     Password: pw,
+    //     Email: email,
+    //   },
+    // };
     const params = {
-      TableName: "CQUsers",
+      TableName: "CalorieQuestUsers",
       Item: {
-        Username: username,
         Password: pw,
+        Email: email,
       },
     };
     const response = await fetch(
@@ -68,11 +78,18 @@ const Main = (props) => {
   const handleLogin = async () => {
     let username;
     let pw;
+    let email;
+    email = document.querySelector("#login-email").value;
     username = document.querySelector("#login-username").value;
     pw = document.querySelector("#login-password").value;
+    // const params = {
+    //   Username: username,
+    //   Password: pw,
+    //   Email: email,
+    // };
     const params = {
-      Username: username,
       Password: pw,
+      Email: email,
     };
     const response = await fetch(
       "https://j8sa414f2f.execute-api.ap-southeast-2.amazonaws.com/CQUsers",
@@ -86,6 +103,7 @@ const Main = (props) => {
     );
     console.log(response);
     const resJSON = await response.json();
+    console.log(resJSON);
     if (resJSON.details === "Login Success") {
       setLogin({ status: true, Username: username });
       setModal(false);
@@ -115,12 +133,12 @@ const Main = (props) => {
   };
 
   return (
-    <div className="h-[100vh] flex items-center flex-col justify-around md:flex-row lg:justify-center lg:gap-[20em] bg-amber-100">
+    <div className="h-[100vh] flex items-center flex-col justify-around md:flex-row lg:justify-center lg:gap-[13em] bg-amber-100">
       {modal && <LoginModal props={modalProps} />}
       {!login.status && <LoginBtn props={loginBtnProps} />}
       <ProfileNav />
-      <div className="flex-grow h-full flex flex-col lg:justify-center md:flex-row lg:gap-[20em] items-center">
-        <div className="max-w-fit">
+      <div className="flex-grow bg-amber-100 h-full flex flex-col md:justify-between lg:justify-center md:flex-row lg:gap-[20em] items-center">
+        <div className="max-w-fit min-w-fit">
           <img
             src="https://soco-st.com/wp-content/themes/socost/upload/7281_color.svg"
             alt="Man on diet restrictions"

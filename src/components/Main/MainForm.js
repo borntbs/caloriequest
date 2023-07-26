@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { arrowDown } from "../svg";
 
 const MainForm = ({ props }) => {
   const ServingSizes = ["lb", "oz", "kg", "g"];
@@ -85,7 +86,6 @@ const MainForm = ({ props }) => {
             value={servingSize}
             required
           />
-          {/* <div className="h-[2px] bg-black w-0 peer-focus:w-[50%] transition-all duration-500"></div> */}
         </div>
 
         <div className="flex flex-col gap-1 relative">
@@ -96,21 +96,7 @@ const MainForm = ({ props }) => {
             <span id="selectedSize" className="font-bold">
               {selectedSize}
             </span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="-mr-1 h-5 w-5 text-gray-400"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-              />
-            </svg>
+            {arrowDown}
           </div>
           <div
             id="sizeOptions"
