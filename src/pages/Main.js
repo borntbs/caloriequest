@@ -5,6 +5,7 @@ import { nutriAPIGateway } from "../DAL/GET";
 import InfoBox from "../components/Main/NutriInfoBox";
 import Loader from "../components/Main/Loader";
 import LoginModal from "../components/Main/LoginModal";
+import ProfileNav from "../components/Main/ProfileNav";
 
 const Main = (props) => {
   const [infoBoxStatus, setInfoBoxStatus] = useState({ open: false, data: {} });
@@ -117,16 +118,19 @@ const Main = (props) => {
     <div className="h-[100vh] flex items-center flex-col justify-around md:flex-row lg:justify-center lg:gap-[20em] bg-amber-100">
       {modal && <LoginModal props={modalProps} />}
       {!login.status && <LoginBtn props={loginBtnProps} />}
-      <div className="max-w-fit">
-        <img
-          src="https://soco-st.com/wp-content/themes/socost/upload/7281_color.svg"
-          alt="Man on diet restrictions"
-        ></img>
-      </div>
-      <div className="gap-5 flex flex-col">
-        <MainForm props={mainFormProps} />
-        {infoBoxStatus.open && <InfoBox props={infoBoxProps} />}
-        {loading && <Loader />}
+      <ProfileNav />
+      <div className="flex-grow h-full flex flex-col lg:justify-center md:flex-row lg:gap-[20em] items-center">
+        <div className="max-w-fit">
+          <img
+            src="https://soco-st.com/wp-content/themes/socost/upload/7281_color.svg"
+            alt="Man on diet restrictions"
+          ></img>
+        </div>
+        <div className="gap-5 flex flex-col">
+          <MainForm props={mainFormProps} />
+          {infoBoxStatus.open && <InfoBox props={infoBoxProps} />}
+          {loading && <Loader />}
+        </div>
       </div>
     </div>
   );
