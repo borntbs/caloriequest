@@ -7,6 +7,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import Main from "./pages/Main";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/home" replace={true} />} />
         <Route path="/home" element={<Main />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );

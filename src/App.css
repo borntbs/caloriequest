@@ -19,10 +19,13 @@ body {
 
 .dropdown {
   opacity: 0;
+  height: 0;
   transition: opacity 0.3s;
+  overflow: hidden;
 }
 
 .dropdown.active {
+  height: auto;
   opacity: 1;
 }
 

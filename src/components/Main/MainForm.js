@@ -6,6 +6,7 @@ const MainForm = ({ props }) => {
   const [selectedSize, setSelectedSize] = useState("g");
   const [foodItem, setFoodItem] = useState("");
   const [servingSize, setServingSize] = useState(100);
+  const [login, setLogin] = useState({ status: false, Email: "" });
 
   const handleSwitchSize = (e) => {
     setSelectedSize(e.currentTarget.innerHTML);
@@ -15,6 +16,7 @@ const MainForm = ({ props }) => {
   useEffect(() => {
     setFoodItem("");
     setServingSize(100);
+    setLogin(props.login);
   }, [props]);
 
   const genSizeOptions = () => {
@@ -61,7 +63,7 @@ const MainForm = ({ props }) => {
           type="text"
           placeholder="Food Item"
           id="foodItem"
-          className="appearance-none peer pl-1 shadow-inner rounded-lg h-[2.1em]"
+          className="appearance-none peer pl-1 shadow-inner rounded-lg h-[2.1em] select-none"
           autoComplete="off"
           onChange={(e) => {
             setFoodItem(e.target.value);
@@ -74,12 +76,12 @@ const MainForm = ({ props }) => {
       </div>
 
       <div className="flex flex-row gap-1">
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 select-none">
           <input
             type="number"
             placeholder="Serving Size"
             id="servingSize"
-            className="peer pl-1 flex-grow shadow-inner rounded-lg"
+            className="peer pl-1 flex-grow shadow-inner rounded-lg "
             onChange={(e) => {
               setServingSize(e.target.value);
             }}
@@ -91,7 +93,7 @@ const MainForm = ({ props }) => {
         <div className="flex flex-col gap-1 relative">
           <div
             onClick={handleDropdown}
-            className="group inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:cursor-pointer"
+            className="select-none group inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:cursor-pointer"
           >
             <span id="selectedSize" className="font-bold">
               {selectedSize}
@@ -106,12 +108,28 @@ const MainForm = ({ props }) => {
           </div>
         </div>
       </div>
-      <button
-        type="submit"
-        className="border-green-300 border-2 rounded-xl w-[10em] hover:bg-transparent bg-green-700 text-white hover:text-black transition-colors hover:border-green-700 font-bold mt-2"
-      >
-        Find Nutri Info
-      </button>
+      <div className="flex flex-row gap-2">
+        <button
+          type="submit"
+          className="border-green-300 border-2 rounded-xl w-[10em] hover:bg-transparent bg-green-700 text-white hover:text-black transition-colors hover:border-green-700 font-bold mt-2"
+        >
+          {"Find Nutri Info"}
+        </button>
+        <div className="relative">
+          <button
+            type="button"
+            className="border-amber-300 border-2 rounded-xl w-[10em] hover:bg-transparent bg-amber-700 text-white hover:text-black transition-colors hover:border-amber-700 font-bold mt-2 peer"
+            onClick={props.handleModal}
+          >
+            {"Save"}
+          </button>
+          {!login.status && (
+            <div className="bg-amber-300 opacity-0 peer-hover:opacity-100 transition-opacity duration-500 p-3 text-md rounded-xl absolute mt-3">
+              Login to save your foods!
+            </div>
+          )}
+        </div>
+      </div>
     </form>
   );
 };

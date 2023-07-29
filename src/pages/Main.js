@@ -11,7 +11,7 @@ const Main = (props) => {
   const [infoBoxStatus, setInfoBoxStatus] = useState({ open: false, data: {} });
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState(false);
-  const [login, setLogin] = useState({ status: false, Username: "" });
+  const [login, setLogin] = useState({ status: false, Email: "" });
 
   const getNutriInfo = async (e) => {
     setLoading(true);
@@ -38,20 +38,10 @@ const Main = (props) => {
   };
 
   const registerUser = async () => {
-    let username;
     let pw;
     let email;
     email = document.querySelector("#login-email").value;
-    username = document.querySelector("#login-username").value;
     pw = document.querySelector("#login-password").value;
-    // const params = {
-    //   TableName: "CQUsers",
-    //   Item: {
-    //     Username: username,
-    //     Password: pw,
-    //     Email: email,
-    //   },
-    // };
     const params = {
       TableName: "CalorieQuestUsers",
       Item: {
@@ -76,17 +66,10 @@ const Main = (props) => {
   };
 
   const handleLogin = async () => {
-    let username;
     let pw;
     let email;
     email = document.querySelector("#login-email").value;
-    username = document.querySelector("#login-username").value;
     pw = document.querySelector("#login-password").value;
-    // const params = {
-    //   Username: username,
-    //   Password: pw,
-    //   Email: email,
-    // };
     const params = {
       Password: pw,
       Email: email,
@@ -105,7 +88,7 @@ const Main = (props) => {
     const resJSON = await response.json();
     console.log(resJSON);
     if (resJSON.details === "Login Success") {
-      setLogin({ status: true, Username: username });
+      setLogin({ status: true, Email: email });
       setModal(false);
     }
   };
@@ -116,6 +99,8 @@ const Main = (props) => {
 
   const mainFormProps = {
     getNutriInfo: getNutriInfo,
+    handleModal: handleModal,
+    login: login,
   };
 
   const infoBoxProps = {
@@ -136,7 +121,7 @@ const Main = (props) => {
     <div className="h-[100vh] flex items-center flex-col justify-around md:flex-row lg:justify-center lg:gap-[13em] bg-amber-100">
       {modal && <LoginModal props={modalProps} />}
       {!login.status && <LoginBtn props={loginBtnProps} />}
-      <ProfileNav />
+      {login.status && <ProfileNav />}
       <div className="flex-grow bg-amber-100 h-full flex flex-col md:justify-between lg:justify-center md:flex-row lg:gap-[20em] items-center">
         <div className="max-w-fit min-w-fit">
           <img
